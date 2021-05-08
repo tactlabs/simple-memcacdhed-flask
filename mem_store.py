@@ -35,7 +35,11 @@ def get_from_local_store(key):
 
     global mem_client
 
-    return mem_client.get(key)
+    result_bytes = mem_client.get(key)
+
+    result = result_bytes.decode('UTF-8')
+
+    return result
 
 def add_in_local_store(key, value):
 
@@ -47,17 +51,27 @@ def add_in_local_store(key, value):
 
     mem_client.add(key, value)
 
+def clear_key_in_local_storey(key):
+
+    global mem_client
+
+    if(mem_client.get(key)):
+        mem_client.set(key, None)
+        return
+
 def startpy():
 
     # print('test1')
 
     # # add
-    name = "Montreal"
-    add_in_local_store("gc_001_name", name)
+    # name = "Montreal"
+    # add_in_local_store("gc_001_name", name)
 
-    # get the previously added value
-    result = get_from_local_store("gc_001_name")
-    print(result)
+    # # get the previously added value
+    # result = get_from_local_store("gc_001_name")
+    # print(result)
+
+    clear_key_in_local_storey('kevin')
 
 
 if __name__ == '__main__':

@@ -36,6 +36,11 @@ def api_add_userword(username):
 
     word = request.values.get('word')
 
+    if(mem_store.is_key_available(username)):
+        old_word = mem_store.get_from_local_store(username)
+
+        word = old_word + "," + word
+
     mem_store.add_in_local_store(username, word)
 
     result = {
