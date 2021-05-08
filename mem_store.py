@@ -11,6 +11,9 @@ Course work:
 
 Source:
     https://realpython.com/python-memcache-efficient-caching/
+
+pip:
+    pymemcache
 '''
 
 # Import necessary modules
@@ -18,6 +21,15 @@ from pymemcache.client import base as memcache_base
 
 mem_client = memcache_base.Client(('localhost', 11211))
 # print(memcache_base)
+
+def is_key_available(key):
+
+    global mem_client
+
+    if(mem_client.get(key)):
+        return True
+    
+    return False
 
 def get_from_local_store(key):
 
